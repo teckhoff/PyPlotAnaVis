@@ -1,4 +1,5 @@
 ﻿import pyqtgraph
+import images_qr
 from PyQt5 import QtGui, QtWidgets
 
 
@@ -52,13 +53,18 @@ class PlottingInput(QtWidgets.QVBoxLayout):
         self.OffsetInputField = FloatInputField("Offset", 0.0, parent)
         self.addLayout(self.OffsetInputField)
 
+        self.ButtonStartIcon = QtGui.QIcon(':/img/Play.png')
+        self.ButtonStopIcon = QtGui.QIcon(':/img/Stop.png')
+
         self.TogglePlottingButton = QtWidgets.QPushButton(parent)
         self.TogglePlottingButton.setText("Start Plotting")
+        self.TogglePlottingButton.setIcon(self.ButtonStartIcon)
         self.TogglePlottingButton.clicked.connect(self.toggle_plotting)
         self.addWidget(self.TogglePlottingButton)
 
     def toggle_plotting(self):
         self.TogglePlottingButton.setText("Stop Plotting" if not self.IsPlotting else "Start Plotting")
+        self.TogglePlottingButton.setIcon(self.ButtonStopIcon if not self.IsPlotting else self.ButtonStartIcon)
         self.IsPlotting = not self.IsPlotting
 
 
